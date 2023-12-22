@@ -1,0 +1,54 @@
+<%- include('partials/header'); -%>
+<div class="login">
+	<div>
+		<h1 class="login__title">hotelzz</h1>
+		<p class="login__subtitle">Administrator</p>
+	</div>
+	<form>
+		<div class="login__input_wrap">
+			<small>email</small>
+			<input type="text" name="email" />
+		</div>
+		<div class="login__input_wrap">
+			<small>password</small>
+			<input type="password" name="password" />
+		</div>
+		<button type="submit">Login</button>
+	</form>
+	<div class="credentials"></div>
+</div>
+<script>
+	const form = document.querySelector('form');
+	const credentials = document.querySelector('.credentials');
+	const inputs = [...form.querySelectorAll('input')];
+	inputs.forEach((input) => {
+		input.addEventListener('focusin', () => {
+			input.previousElementSibling.classList.add('!text-blue-400');
+		});
+		input.addEventListener('focusout', () => {
+			input.previousElementSibling.classList.remove('!text-blue-400');
+		});
+	});
+	form.addEventListener('submit', async (e) => {
+		e.preventDefault();
+		const email = form.email.value;
+		const password = form.password.value;
+		try {
+			const res = await fetch('/login', {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json',
+				},
+				body: JSON.stringify({ email, password }),
+			});
+			data = await res.json();
+
+			console.log(res.status, res.statusText);
+			if ((res.status = 200)) {
+				//location.assign('/rooms');
+			}
+		} catch (error) {
+			console.log(error);
+		}
+	});
+</script>

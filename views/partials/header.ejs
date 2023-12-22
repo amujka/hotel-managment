@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link rel="stylesheet" href="/styles.css" />
+		<title>hotel-cms</title>
+	</head>
+	<body>
+		<% if (locals.page) { %>
+		<header class="header">
+			<ul class="header__nav">
+				<li
+					class="header__nav_item <% if (page === 'rooms') { %>active_link <% } %>"
+				>
+					<a href="/rooms">rooms</a>
+				</li>
+				<li
+					class="header__nav_item <% if (page === 'users') { %>active_link <% } %>"
+				>
+					<a href="/users">users</a>
+				</li>
+				<li
+					class="header__nav_item <% if (page === 'booking') { %>active_link <% } %>"
+				>
+					<a href="/booking">booking</a>
+				</li>
+				<li
+					class="header__nav_item <% if (page === 'reviews') { %>active_link <% } %>"
+				>
+					<a href="/reviews">reviews</a>
+				</li>
+			</ul>
+		</header>
+		<% } %>
+	</body>
+</html>

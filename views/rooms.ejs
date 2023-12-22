@@ -1,0 +1,11 @@
+<%-include('partials/header')%>
+<h1>Room List</h1>
+<ul class="article-ul">
+	<% rooms.forEach(room => { %>
+	<li>
+		<a href="#" class="">
+			<span><%= room.name %></span>
+		</a>
+	</li>
+	<% }) %>
+</ul>
