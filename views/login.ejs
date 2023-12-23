@@ -8,19 +8,21 @@
 		<div class="login__input_wrap">
 			<small>email</small>
 			<input type="text" name="email" />
+			<small class="emailError error"></small>
 		</div>
 		<div class="login__input_wrap">
 			<small>password</small>
 			<input type="password" name="password" />
+			<small class="passwordError error"></small>
 		</div>
 		<button type="submit">Login</button>
 	</form>
-	<div class="credentials"></div>
 </div>
 <script>
 	const form = document.querySelector('form');
-	const credentials = document.querySelector('.credentials');
 	const inputs = [...form.querySelectorAll('input')];
+	const emailError = form.querySelector('.emailError');
+	const passwordError = form.querySelector('.passwordError');
 	inputs.forEach((input) => {
 		input.addEventListener('focusin', () => {
 			input.previousElementSibling.classList.add('!text-blue-400');
@@ -33,6 +35,8 @@
 		e.preventDefault();
 		const email = form.email.value;
 		const password = form.password.value;
+		emailError.textContent = '';
+		passwordError.textContent = '';
 		try {
 			const res = await fetch('/login', {
 				method: 'POST',
@@ -42,13 +46,14 @@
 				body: JSON.stringify({ email, password }),
 			});
 			data = await res.json();
-
-			console.log(res.status, res.statusText);
-			if ((res.status = 200)) {
-				//location.assign('/rooms');
+			if (data.errors) {
+				emailError.textContent = data.errors.email;
+				passwordError.textContent = data.errors.password;
+			} else if (data.user) {
+				location.assign('/rooms');
 			}
 		} catch (error) {
-			console.log(error);
+			console.log('error', error);
 		}
 	});
 </script>
