@@ -1,59 +1,69 @@
-<%- include('partials/header'); -%>
-<div class="login">
-	<div>
-		<h1 class="login__title">hotelzz</h1>
-		<p class="login__subtitle">Administrator</p>
-	</div>
-	<form>
-		<div class="login__input_wrap">
-			<small>email</small>
-			<input type="text" name="email" />
-			<small class="emailError error"></small>
-		</div>
-		<div class="login__input_wrap">
-			<small>password</small>
-			<input type="password" name="password" />
-			<small class="passwordError error"></small>
-		</div>
-		<button type="submit">Login</button>
-	</form>
-</div>
-<script>
-	const form = document.querySelector('form');
-	const inputs = [...form.querySelectorAll('input')];
-	const emailError = form.querySelector('.emailError');
-	const passwordError = form.querySelector('.passwordError');
-	inputs.forEach((input) => {
-		input.addEventListener('focusin', () => {
-			input.previousElementSibling.classList.add('!text-blue-400');
-		});
-		input.addEventListener('focusout', () => {
-			input.previousElementSibling.classList.remove('!text-blue-400');
-		});
-	});
-	form.addEventListener('submit', async (e) => {
-		e.preventDefault();
-		const email = form.email.value;
-		const password = form.password.value;
-		emailError.textContent = '';
-		passwordError.textContent = '';
-		try {
-			const res = await fetch('/login', {
-				method: 'POST',
-				headers: {
-					'Content-Type': 'application/json',
-				},
-				body: JSON.stringify({ email, password }),
-			});
-			data = await res.json();
-			if (data.errors) {
-				emailError.textContent = data.errors.email;
-				passwordError.textContent = data.errors.password;
-			} else if (data.user) {
-				location.assign('/rooms');
-			}
-		} catch (error) {
-			console.log('error', error);
-		}
-	});
-</script>
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link rel="stylesheet" href="/styles.css" />
+		<title>hotel-cms</title>
+	</head>
+	<body>
+    <div class="login">
+        <div>
+            <h1 class="login__title">hotelzz</h1>
+            <p class="login__subtitle">Administrator</p>
+        </div>
+        <form>
+            <div class="login__input_wrap">
+                <small>email</small>
+                <input type="text" name="email" />
+                <small class="emailError error"></small>
+            </div>
+            <div class="login__input_wrap">
+                <small>password</small>
+                <input type="password" name="password" />
+                <small class="passwordError error"></small>
+            </div>
+            <button type="submit">Login</button>
+        </form>
+    </div>
+    <script>
+        const form = document.querySelector('form');
+        const inputs = [...form.querySelectorAll('input')];
+        const emailError = form.querySelector('.emailError');
+        const passwordError = form.querySelector('.passwordError');
+        inputs.forEach((input) => {
+            input.addEventListener('focusin', () => {
+                input.previousElementSibling.classList.add('!text-blue-400');
+            });
+            input.addEventListener('focusout', () => {
+                input.previousElementSibling.classList.remove('!text-blue-400');
+            });
+        });
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const email = form.email.value;
+            const password = form.password.value;
+            emailError.textContent = '';
+            passwordError.textContent = '';
+            try {
+                const res = await fetch('/login', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ email, password }),
+                });
+                data = await res.json();
+                if (data.errors) {
+                    emailError.textContent = data.errors.email;
+                    passwordError.textContent = data.errors.password;
+                } else if (data.user) {
+                    location.assign('/rooms');
+                }
+            } catch (error) {
+                console.log('error', error);
+            }
+        });
+    </script>
+</body>
+</html>
