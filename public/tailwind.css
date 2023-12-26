@@ -65,3 +65,19 @@ header {
 .error {
 	@apply text-red-600 font-semibold;
 }
+
+.page {
+	@apply mt-10;
+}
+
+.page__container {
+	@apply max-w-7xl mx-auto p-4 bg-red-100;
+}
+
+.page__title {
+	@apply mb-5 text-3xl font-bold text-slate-800 underline capitalize;
+}
+
+.rooms__list {
+	@apply flex flex-col gap-4;
+}

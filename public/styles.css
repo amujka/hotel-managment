@@ -703,3 +703,33 @@ header {
   --tw-text-opacity: 1;
   color: rgb(220 38 38 / var(--tw-text-opacity));
 }
+
+.page {
+  margin-top: 2.5rem;
+}
+
+.page__container {
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 80rem;
+  --tw-bg-opacity: 1;
+  background-color: rgb(254 226 226 / var(--tw-bg-opacity));
+  padding: 1rem;
+}
+
+.page__title {
+  margin-bottom: 1.25rem;
+  font-size: 1.875rem;
+  line-height: 2.25rem;
+  font-weight: 700;
+  text-transform: capitalize;
+  --tw-text-opacity: 1;
+  color: rgb(30 41 59 / var(--tw-text-opacity));
+  text-decoration-line: underline;
+}
+
+.rooms__list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
